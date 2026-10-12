@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Class Inheritance</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2ff;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 25px;
+            max-width: 450px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #cccccc;
+        }
+
+        input {
+            padding: 10px;
+            margin: 8px;
+            width: 80%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4f46e5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            color: #3730a3;
+            font-weight: bold;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Class Inheritance</h2>
+        <p>Enter student details:</p>
+
+        <input type="text" id="name" placeholder="Enter student name">
+
+        <br>
+
+        <input type="number" id="age" placeholder="Enter student age">
+
+        <br>
+
+        <input type="text" id="course" placeholder="Enter course name">
+
+        <br>
+
+        <button onclick="showDetails()">Show Details</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        // Parent class
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            displayPerson() {
+                return "Name: " + this.name +
+                    "<br>Age: " + this.age;
+            }
+        }
+
+        // Child class
+        class Student extends Person {
+            constructor(name, age, course) {
+
+                // Call parent constructor
+                super(name, age);
+
+                this.course = course;
+            }
+
+            displayStudent() {
+                return this.displayPerson() +
+                    "<br>Course: " + this.course;
+            }
+        }
+
+        function showDetails() {
+            const name =
+                document.getElementById("name").value.trim();
+
+            const age =
+                document.getElementById("age").value;
+
+            const course =
+                document.getElementById("course").value.trim();
+
+            if (name === "" || age === "" ||
+                Number(age) <= 0 || course === "") {
+                document.getElementById("result").textContent =
+                    "Please enter valid details.";
+                return;
+            }
+
+            // Create child class object
+            const student1 = new Student(name, Number(age), course);
+
+            // Display inherited and child class details
+            document.getElementById("result").innerHTML =
+                student1.displayStudent();
+        }
+    </script>
+
+</body>
+
+</html>
